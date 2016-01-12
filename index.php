@@ -1,5 +1,6 @@
 <?php
 
+require_once 'autoload.php'; //load app classes
 require_once 'lib/limonade.php';
 
 dispatch('/css/:css', 'AssetController::css');
