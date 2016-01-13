@@ -10,8 +10,9 @@ dispatch('/js/:js', 'AssetController::js');
 
 dispatch_get('/', 'PostController::index'); 
 dispatch_get('/new', 'PostController::neew'); //R
-dispatch_get('/:post', 'PostController::post'); 
+dispatch_get('/edit/:post', 'PostController::edit'); //R
 dispatch_post('/:post', 'PostController::save'); //C, U
+dispatch_get('/:post', 'PostController::post'); 
 dispatch_post('/remove/:post', 'PostController::remove'); //D
 
 

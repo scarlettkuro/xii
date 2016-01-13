@@ -39,17 +39,25 @@ class PostStorage {
 			$post->setText($collection[$id]['text']);
 			array_push($posts,$post);
 		}
-
+		$posts = array_reverse($posts);
 		return $posts;
 	}
 	
 	//add or update
 	static function savePost($post) {
 		$db = self::load();
-		$db['posts'][$post->id] = array(
-			'text' => $post->text,
+		//get new ID
+		if ($post->getID())
+			$id = $post->getID();
+		else
+			$id = max(array_keys($db['posts']))+1;
+		//write
+		$db['posts'][$id] = array(
+			'text' => $post->getText(),
 		);
 		self::save($db);
+		
+		return $id;
 	}
 	
 	static function removePost($id) {

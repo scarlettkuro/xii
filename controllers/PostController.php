@@ -14,7 +14,7 @@ class PostController {
 	}
 	
 	static function neew() {
-		set('post', new Post(''));
+		set('post', new Post(null));
 		return html('edit.htm.php');
 	}
 	
@@ -26,14 +26,16 @@ class PostController {
 	//Do action and redirect
 	
 	static function save($id) {
+		
 		$post = new Post($id);
 		$post->setText($_POST['post_text']);
-		return self::post($id);
+		$newid = PostStorage::savePost($post);
+		redirect_to('/' . $newid);
 	}
 	
 	static function remove($id) {
 		PostStorage::removePost($id);
-		return self::index();
+		redirect_to('/');
 	}
 }
 
