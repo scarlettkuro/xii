@@ -29,6 +29,7 @@ class PostController {
 		
 		$post = new Post($id);
 		$post->setText($_POST['post_text']);
+		$post->setTitle($_POST['post_title']);
 		$newid = PostStorage::savePost($post);
 		redirect_to('/' . $newid);
 	}

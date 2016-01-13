@@ -16,7 +16,7 @@
 	<!-- POST -->
 	<row centered>
 		<column cols="7" class="mainpost">
-			<h1>Hello, Kitty Ken</h1>
+			<h1><?=$post->getTitle()?></h1>
 			<p><?=$post->getText()?></p>
 		</column>
 	</row>

@@ -13,6 +13,14 @@ class PostStorage {
 		file_put_contents ( self::$db_filename, json_encode($db));
 	}
 		
+	static private function getPostFromJSON($id, $json) {
+		$post = new Post($id);
+		$post->setText($json['text']);
+		$post->setTitle($json['title']);
+		
+		return $post;
+	}
+		
 	static function getPost($id) {
 		$db = self::load();
 		$collection = $db['posts'];
@@ -22,10 +30,7 @@ class PostStorage {
 		
 		$db_post = $collection[$id];
 		
-		$post = new Post($id);
-		$post->setText($collection[$id]['text']);
-		
-		return $post;
+		return self::getPostFromJSON($id, $collection[$id]);
 	}
 		
 	static function getPosts() {
@@ -33,12 +38,9 @@ class PostStorage {
 		$collection = $db['posts'];
 		$posts = array();
 		
-		foreach(array_keys($collection) as $id) {
-			$db_post = $collection[$id];
-			$post = new Post($id);
-			$post->setText($collection[$id]['text']);
-			array_push($posts,$post);
-		}
+		foreach(array_keys($collection) as $id) 
+			array_push($posts,self::getPostFromJSON($id, $collection[$id]));
+		
 		$posts = array_reverse($posts);
 		return $posts;
 	}
@@ -54,6 +56,7 @@ class PostStorage {
 		//write
 		$db['posts'][$id] = array(
 			'text' => $post->getText(),
+			'title' => $post->getTitle(),
 		);
 		self::save($db);
 		

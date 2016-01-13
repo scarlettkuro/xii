@@ -13,11 +13,12 @@
         <h1>I guess, you are {{username}}</h1>
     </row>
 	
+	<? $headpost = $posts[0]; ?>
 	<!-- NEW POST -->
 	<row centered>
 		<column cols="7" class="mainpost">
-			<h1><a href="/<?=$posts[0]->getID()?>">Hello, Kitty Ken</a></h1>
-			<p><?=$posts[0]->getText()?></p>
+			<h1><a href="/<?=$headpost->getID()?>"><?=$headpost->getTitle()?></a></h1>
+			<p><?=$headpost->getText()?></p>
 		</column>
 	</row>
 	
@@ -26,13 +27,13 @@
         <column cols="7" >
 			<row centered>
 				<column cols="4">
-					<a href="/edit/<?=$posts[0]->getID()?>" class="btn width-12" outline>Edit</a>
+					<a href="/edit/<?=$headpost->getID()?>" class="btn width-12" outline>Edit</a>
 				</column>
 				<column cols="4">
 					<a href="" class="btn width-12" outline>Hide</a>
 				</column>
 				<column cols="4">
-					<a href="/<?=$posts[0]->getID()?>" class="btn width-12" outline>Comments(13)</a>
+					<a href="/<?=$headpost->getID()?>" class="btn width-12" outline>Comments(13)</a>
 				</column>
 			</row>
 		</column>
@@ -44,7 +45,7 @@
         <column cols="7" class="post">
 			<!-- POST -->
 			<?php foreach(array_slice($posts,1) as $post): ?>
-			<h2><a href="/<?=$post->getID()?>">Hello, Kitty Ken</a></h2>
+			<h2><a href="/<?=$post->getID()?>"><?=$post->getTitle()?></a></h2>
 			<p><?= $post->getText() ?></p>
 			<hr/>
 			<!-- POST CONTROLS-->

@@ -17,7 +17,7 @@
 	<!-- NEW POST -->
 	<row centered>
 		<column cols="7" class="post">
-			<h1>Hello, Kitty Ken</h1>
+			<input name="post_title" type="text" class = "width-12" value = "<?=$post->getTitle()?>"/>
             <textarea name="post_text" rows="10"><?=$post->getText()?></textarea>
      
 		</column>
